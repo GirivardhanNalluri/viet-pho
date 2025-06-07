@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viet-Pho | Vietnamese Restaurant</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body class="bg-yellow-50">
+  <!-- Header -->
+  <header class="bg-red-600 text-white p-4 shadow">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Viet-Pho</h1>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <main class="container mx-auto my-10 text-center">
+    <h2 class="text-3xl font-semibold mb-6">Authentic Vietnamese Cuisine</h2>
+    <p class="mb-8 text-gray-700">Experience the best of Vietnam with our signature dishes:</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+      <div class="bg-white p-6 rounded shadow">Sandwich</div>
+      <div class="bg-white p-6 rounded shadow">Vermicelli Noodles</div>
+      <div class="bg-white p-6 rounded shadow">Fried Rice</div>
+      <div class="bg-white p-6 rounded shadow">Fish</div>
+      <div class="bg-white p-6 rounded shadow">White Rice Bowls</div>
+      <div class="bg-white p-6 rounded shadow">Hot Pot</div>
+      <div class="bg-white p-6 rounded shadow">Drinks</div>
+    </div>
+
+    <!-- Login/Register Buttons -->
+    <div class="mb-10">
+      <a href="{{ url_for('login') }}" class="btn btn-outline-primary mx-2 px-4 py-2">Login</a>
+      <a href="{{ url_for('register') }}" class="btn btn-outline-success mx-2 px-4 py-2">Register</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white p-4 text-center">
+    &copy; 2025 Viet-Pho Restaurant
+  </footer>
+</body>
+</html>

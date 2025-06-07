@@ -1,0 +1,47 @@
+
+/* Body and font */
+body, html {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom header styling */
+header {
+  background-color: #b91c1c; /* Tailwind red-700 */
+}
+
+/* Dish cards */
+.grid div {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grid div:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Login/Register buttons */
+.btn-outline-primary,
+.btn-outline-success {
+  font-weight: 600;
+  border-radius: 0.5rem;
+  min-width: 120px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-outline-primary:hover {
+  background-color: #2563eb; /* Tailwind blue-600 */
+  color: white;
+}
+
+.btn-outline-success:hover {
+  background-color: #16a34a; /* Tailwind green-600 */
+  color: white;
+}
+
+/* Footer */
+footer {
+  background-color: #1f2937; /* Tailwind gray-800 */
+  font-size: 0.9rem;
+}
