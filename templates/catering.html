@@ -1,0 +1,546 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Viet-Pho Catering</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../statics/css/catering.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Leaflet CSS -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+  <header class="header d-flex justify-content-between align-items-center px-4 py-2">
+    <div class="header-left fw-bold fs-4">Viet-Pho</div>
+    <div class="header-right">
+      <a href="index.html" class="logout-button btn btn-outline-danger">Logout</a>
+    </div>
+  </header>
+
+  <div class="slideshow-container">
+    <div class="image-slider" id="imageSlider">
+      <div class="image-slide"><img src="../statics/images/sand1.jpg" alt="Slide 1"></div>
+      <div class="image-slide"><img src="../statics/images/vn1.jpg" alt="Slide 2"></div>
+      <div class="image-slide"><img src="../statics/images/fr1.jpg" alt="Slide 3"></div>
+      <div class="image-slide"><img src="../statics/images/rice1.jpg" alt="Slide 3"></div>
+    </div>
+  </div>
+
+  <div class="dot-container text-center mt-2">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+<!-- Schedule Button -->
+<button type="button" class="schedule-button ms-2" onclick="toggleSchedulePopover(event)">
+  <i class="fas fa-calendar-alt"></i> Schedule Date
+</button>
+
+<!-- Popover Container -->
+<div id="schedulePopover" class="schedule-popover shadow">
+  <div class="popover-content p-3">
+    <h6 class="fw-semibold mb-2">Pick a Date & Time</h6>
+    <form id="scheduleFormPopover">
+      <table class="table table-sm table-bordered text-center align-middle mb-3">
+        <tr>
+          <td><label for="scheduleDate" class="form-label mb-0">Date:</label></td>
+          <td><input type="date" class="form-control form-control-sm" id="scheduleDate" required></td>
+        </tr>
+        <tr>
+          <td><label for="scheduleTime" class="form-label mb-0">Time:</label></td>
+          <td><input type="time" class="form-control form-control-sm" id="scheduleTime" required></td>
+        </tr>
+      </table>
+      <div class="text-end">
+        <button type="submit" class="btn btn-sm btn-success">Confirm</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<button type="button" class="menu-button" onclick="openMenuPopup()">
+  <i class="fas fa-utensils"></i> Menu
+</button>
+
+  <!-- Menu Popup -->
+  <div id="menuPopup" class="menu-popup">
+    <div class="menu-content">
+      <span class="close-btn" onclick="closeMenuPopup()">&times;</span>
+      <h3>Our Menu</h3>
+<ul>
+  <li onclick="scrollToItem('menu-sandwich')">🥪 Sandwich</li>
+  <li onclick="scrollToItem('menu-noodles')">🍜 Vermicelli Noodles</li>
+  <li onclick="scrollToItem('menu-fried-rice')">🍚 Fried Rice</li>
+  <li onclick="scrollToItem('menu-white-rice')">🍙 White Rice</li>
+  <li onclick="scrollToItem('menu-hotpot')">🍲 Hot Pot</li>
+  <li onclick="scrollToItem('menu-drinks')">🥤 Drinks</li>
+</ul>
+    </div>
+  </div>
+
+  <!-- Menu Section (Featured Items) -->
+  <section class="menu-section container mt-5 mb-5">
+    <h2 class="text-center mb-4">Our Featured Menu</h2>
+    <div class="row g-4">
+<button type="button" class="cart-button" id="cartButton" onclick="openCart()" style="display: none;">
+  <i class="fas fa-shopping-cart"></i> Cart
+</button>
+
+      <div class="col-md-4">
+        <div class="card menu-card h-100">
+          <img src="../statics/images/sand1.jpg" class="card-img-top" id="menu-sandwich" alt="Sandwich">
+          <div class="card-body">
+            <h5 class="card-title">Vietnamese Sandwich</h5>
+            <p class="card-text">Crispy baguette filled with grilled meat, pickled veggies, and herbs.</p>
+            <p class="price text-danger fw-bold">$6.99</p>
+      <button class="btn btn-sm btn-success add-to-cart-btn" onclick="showQuantitySelector(this)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card menu-card h-100">
+          <img src="../statics/images/sand2.jpg" class="card-img-top" alt="Sandwich">
+          <div class="card-body">
+            <h5 class="card-title">Vietnamese Sandwich</h5>
+            <p class="card-text">Stir-fried rice with shrimp, eggs, and seasonal vegetables.</p>
+            <p class="price text-danger fw-bold">$7.50</p>
+<button class="btn btn-sm btn-success add-to-cart-btn" onclick="showQuantitySelector(this)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card menu-card h-100">
+          <img src="../statics/images/sand3.jpg" class="card-img-top" alt="Sandwich">
+          <div class="card-body">
+            <h5 class="card-title">Vietnamese Sandwich</h5>
+            <p class="card-text">Stir-fried rice with shrimp, eggs, and seasonal vegetables.</p>
+            <p class="price text-danger fw-bold">$7.50</p>  
+<button class="btn btn-sm btn-success add-to-cart-btn" onclick="showQuantitySelector(this)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card menu-card h-100">
+          <img src="../statics/images/vn1.jpg" class="card-img-top" id="menu-noodles" alt="Noodles">
+          <div class="card-body">
+            <h5 class="card-title">Vermicelli Noodles</h5>
+            <p class="card-text">Fresh rice noodles served with grilled pork and house fish sauce.</p>
+            <p class="price text-danger fw-bold">$8.50</p>
+<button class="btn btn-sm btn-success add-to-cart-btn" onclick="showQuantitySelector(this)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card menu-card h-100">
+          <img src="../statics/images/vn2.jpg" class="card-img-top" alt="Noodles">
+          <div class="card-body">
+            <h5 class="card-title">Vermicelli Noodles</h5>
+            <p class="card-text">Stir-fried rice with shrimp, eggs, and seasonal vegetables.</p>
+            <p class="price text-danger fw-bold">$7.50</p>
+<button class="btn btn-sm btn-success add-to-cart-btn" onclick="showQuantitySelector(this)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card menu-card h-100">
+          <img src="../statics/images/vn3.jpg" class="card-img-top" alt="Noodles">
+          <div class="card-body">
+            <h5 class="card-title">Vermicelli Noodles1</h5>
+            <p class="card-text">Stir-fried rice with shrimp, eggs, and seasonal vegetables.</p>
+            <p class="price text-danger fw-bold">$7.50</p>
+<button class="btn btn-sm btn-success add-to-cart-btn" onclick="showQuantitySelector(this)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card menu-card h-100">
+          <img src="../statics/images/fr1.jpg" class="card-img-top" id="menu-fried-rice" alt="Fried Rice">
+          <div class="card-body">
+            <h5 class="card-title">Vietnamese Fried Rice</h5>
+            <p class="card-text">Stir-fried rice with shrimp, eggs, and seasonal vegetables.</p>
+            <p class="price text-danger fw-bold">$7.50</p>
+<button class="btn btn-sm btn-success add-to-cart-btn" onclick="showQuantitySelector(this)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card menu-card h-100">
+          <img src="../statics/images/fr2.jpg" class="card-img-top" alt="Fried Rice">
+          <div class="card-body">
+            <h5 class="card-title">Vietnamese Fried Rice</h5>
+            <p class="card-text">Stir-fried rice with shrimp, eggs, and seasonal vegetables.</p>
+            <p class="price text-danger fw-bold">$7.50</p>
+<button class="btn btn-sm btn-success add-to-cart-btn" onclick="showQuantitySelector(this)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card menu-card h-100">
+          <img src="../statics/images/fr3.jpg" class="card-img-top" alt="Fried Rice">
+          <div class="card-body">
+            <h5 class="card-title">Vietnamese Fried Rice</h5>
+            <p class="card-text">Stir-fried rice with shrimp, eggs, and seasonal vegetables.</p>
+            <p class="price text-danger fw-bold">$7.50</p>
+<button class="btn btn-sm btn-success add-to-cart-btn" onclick="showQuantitySelector(this)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card menu-card h-100">
+          <img src="../statics/images/rice1.jpg" class="card-img-top" id="menu-white-rice" alt="white Rice">
+          <div class="card-body">
+            <h5 class="card-title">White Rice</h5>
+            <p class="card-text">Stir-fried rice with shrimp, eggs, and seasonal vegetables.</p>
+            <p class="price text-danger fw-bold">$7.50</p>
+<button class="btn btn-sm btn-success add-to-cart-btn" onclick="showQuantitySelector(this)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card menu-card h-100">
+          <img src="../statics/images/rice2.jpg" class="card-img-top" alt="white Rice">
+          <div class="card-body">
+            <h5 class="card-title">White Rice</h5>
+            <p class="card-text">Stir-fried rice with shrimp, eggs, and seasonal vegetables.</p>
+            <p class="price text-danger fw-bold">$7.50</p>
+<button class="btn btn-sm btn-success add-to-cart-btn" onclick="showQuantitySelector(this)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+<div id="cartModal" class="cart-modal">
+  <div class="cart-content">
+    <span class="close-btn" onclick="closeCart()">&times;</span>
+    <h3>Your Cart</h3>
+    <div id="cartItemsContainer"></div>
+    <div class="text-end mt-3">
+      <button class="btn btn-primary" id="placeOrderButton">Place Order</button>
+    </div>
+  </div>
+</div>
+
+<div class="text-center mb-6">
+  <p class="text-lg mb-2 font-semibold">Follow us on</p>
+  <a href="https://www.instagram.com/girivardhan_nalluri?igsh=MTM2aXNvb3MyeXJoYg==" target="_blank" class="text-red-600 text-2xl mx-2 hover:text-red-800">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="https://x.com/GIRINALLURI2301?t=NDQ-mRdtzx9msw10d4_SBA&s=09" target="_blank" class="text-blue-500 text-2xl mx-2 hover:text-blue-700">
+    <i class="fab fa-twitter"></i>
+  </a>
+</div>
+
+  <footer class="footer text-center">
+    <p>&copy; 2025 Viet-Pho. All rights reserved.</p>
+  </footer>
+
+  <script>
+function scrollToItem(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    closeMenuPopup(); 
+  }
+}
+    let currentIndex = 0;
+    const slider = document.getElementById('imageSlider');
+    const dots = document.querySelectorAll('.dot');
+    const totalSlides = document.querySelectorAll('.image-slide').length;
+
+    function updateSlide(index) {
+      slider.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[index].classList.add('active');
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateSlide(currentIndex);
+    }
+
+    setInterval(nextSlide, 3000);
+    updateSlide(currentIndex);
+
+    // Menu popup control
+    function openMenuPopup() {
+      document.getElementById('menuPopup').style.display = 'block';
+    }
+
+    function closeMenuPopup() {
+      document.getElementById('menuPopup').style.display = 'none';
+    }
+function showQuantitySelector(button) {
+  const container = document.createElement('div');
+  container.className = 'quantity-selector';
+
+  let quantity = 1;
+
+  const decrementBtn = document.createElement('button');
+  decrementBtn.className = 'quantity-btn';
+  decrementBtn.innerText = '−';
+  decrementBtn.onclick = () => {
+    if (quantity > 1) {
+      quantity--;
+      quantityDisplay.innerText = quantity;
+    } else {
+      const addButton = document.createElement('button');
+      addButton.className = 'btn btn-sm btn-success add-to-cart-btn';
+      addButton.innerText = 'Add to Cart';
+      addButton.onclick = () => showQuantitySelector(addButton);
+      button.parentElement.appendChild(addButton);
+      container.remove();
+    }
+  };
+
+  const incrementBtn = document.createElement('button');
+  incrementBtn.className = 'quantity-btn';
+  incrementBtn.innerText = '+';
+  incrementBtn.onclick = () => {
+    quantity++;
+    quantityDisplay.innerText = quantity;
+  };
+
+  const quantityDisplay = document.createElement('span');
+  quantityDisplay.className = 'quantity-number';
+  quantityDisplay.innerText = quantity;
+
+  container.appendChild(decrementBtn);
+  container.appendChild(quantityDisplay);
+  container.appendChild(incrementBtn);
+
+  button.parentElement.appendChild(container);
+  button.remove();
+
+  document.getElementById('cartButton').style.display = 'inline-block';
+}
+
+let cart = [];
+
+function showQuantitySelector(button) {
+  const card = button.closest('.card');
+  const title = card.querySelector('.card-title').innerText;
+  const price = parseFloat(card.querySelector('.price').innerText.replace('$', ''));
+
+  let quantity = 1;
+
+  const container = document.createElement('div');
+  container.className = 'quantity-selector d-flex align-items-center gap-2 mt-2';
+
+  const decrementBtn = document.createElement('button');
+  decrementBtn.className = 'quantity-btn';
+  decrementBtn.innerText = '−';
+  decrementBtn.onclick = () => {
+    if (quantity > 1) {
+      quantity--;
+      quantityDisplay.innerText = quantity;
+      updateCart(title, price, quantity);
+    }
+  };
+
+  const incrementBtn = document.createElement('button');
+  incrementBtn.className = 'quantity-btn';
+  incrementBtn.innerText = '+';
+  incrementBtn.onclick = () => {
+    quantity++;
+    quantityDisplay.innerText = quantity;
+    updateCart(title, price, quantity);
+  };
+
+  const quantityDisplay = document.createElement('span');
+  quantityDisplay.className = 'quantity-number';
+  quantityDisplay.innerText = quantity;
+
+  container.appendChild(decrementBtn);
+  container.appendChild(quantityDisplay);
+  container.appendChild(incrementBtn);
+
+  button.parentElement.appendChild(container);
+  button.remove();
+
+  addToCart(title, price, quantity);
+  document.getElementById('cartButton').style.display = 'inline-block';
+}
+
+function addToCart(name, price, quantity) {
+  const existing = cart.find(item => item.name === name);
+  if (existing) {
+    existing.quantity += quantity;
+  } else {
+    cart.push({ name, price, quantity });
+  }
+}
+
+function updateCart(name, price, quantity) {
+  const existing = cart.find(item => item.name === name);
+  if (existing) {
+    existing.quantity = quantity;
+  } else {
+    cart.push({ name, price, quantity });
+  }
+}
+
+function openCart() {
+  const container = document.getElementById('cartItemsContainer');
+  container.innerHTML = '';
+
+  if (cart.length === 0) {
+    container.innerHTML = '<p>Your cart is empty.</p>';
+  } else {
+    cart.forEach((item, index) => {
+      const row = document.createElement('div');
+      row.className = 'd-flex justify-content-between align-items-center border-bottom py-2';
+
+      const nameCol = document.createElement('div');
+      nameCol.innerText = `${item.name} ($${item.price.toFixed(2)})`;
+
+      const qtyControls = document.createElement('div');
+      qtyControls.className = 'd-flex align-items-center gap-2';
+
+      const decBtn = document.createElement('button');
+      decBtn.className = 'btn btn-sm btn-outline-secondary';
+      decBtn.innerText = '−';
+      decBtn.onclick = () => {
+        if (item.quantity > 1) {
+          item.quantity--;
+        } else {
+          cart.splice(index, 1);
+        }
+        openCart();
+      };
+
+      const qty = document.createElement('span');
+      qty.innerText = item.quantity;
+
+      const incBtn = document.createElement('button');
+      incBtn.className = 'btn btn-sm btn-outline-secondary';
+      incBtn.innerText = '+';
+      incBtn.onclick = () => {
+        item.quantity++;
+        openCart();
+      };
+
+      qtyControls.appendChild(decBtn);
+      qtyControls.appendChild(qty);
+      qtyControls.appendChild(incBtn);
+
+      row.appendChild(nameCol);
+      row.appendChild(qtyControls);
+      container.appendChild(row);
+    });
+  }
+  document.getElementById('cartModal').style.display = 'block';
+}
+function closeCart() {
+  document.getElementById('cartModal').style.display = 'none';
+}
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Set tomorrow's date as the minimum selectable date
+    const dateInput = document.getElementById('scheduleDate');
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+
+    // Format as yyyy-mm-dd
+    const yyyy = tomorrow.getFullYear();
+    const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+    const dd = String(tomorrow.getDate()).padStart(2, '0');
+    const minDate = `${yyyy}-${mm}-${dd}`;
+
+    dateInput.min = minDate;
+  });
+
+  document.getElementById('placeOrderButton').addEventListener('click', function (e) {
+    const dateInput = document.getElementById('scheduleDate').value;
+    const timeInput = document.getElementById('scheduleTime').value;
+
+    if (!dateInput || !timeInput) {
+      e.preventDefault();
+      alert("Please schedule your order by selecting both date and time.");
+      return;
+    }
+
+    const scheduledDate = new Date(`${dateInput}T${timeInput}`);
+    const now = new Date();
+
+    // Get only the year, month, and day for comparison (strip time)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const scheduledDay = new Date(scheduledDate);
+    scheduledDay.setHours(0, 0, 0, 0);
+
+    if (scheduledDay.getTime() === today.getTime()) {
+      e.preventDefault();
+      alert("Orders cannot be scheduled for today. Please select a future date.");
+      return;
+    }
+
+    if (scheduledDate <= now) {
+      e.preventDefault();
+      alert("Scheduled date and time must be in the future.");
+      return;
+    }
+
+    // Proceed with placing the order
+    alert(`Order placed for ${scheduledDate.toLocaleString()}`);
+  });
+
+function toggleSchedulePopover(event) {
+  const popover = document.getElementById('schedulePopover');
+  const button = event.currentTarget;
+  const rect = button.getBoundingClientRect();
+
+  // Position near the button
+  popover.style.top = `${rect.bottom + window.scrollY + 5}px`;
+  popover.style.left = `${rect.left + window.scrollX}px`;
+
+  // Toggle visibility
+  popover.classList.toggle('show');
+}
+
+// Handle form submission
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('scheduleFormPopover');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const date = document.getElementById('scheduleDate').value;
+    const time = document.getElementById('scheduleTime').value;
+    alert(`Scheduled on ${date} at ${time}`);
+    document.getElementById('schedulePopover').classList.remove('show');
+  });
+
+  // Close if clicked outside
+  document.addEventListener('click', function (e) {
+    const popover = document.getElementById('schedulePopover');
+    const button = document.querySelector('.schedule-button');
+    if (!popover.contains(e.target) && !button.contains(e.target)) {
+      popover.classList.remove('show');
+    }
+  });
+});
+
+  </script>
+</body>
+</html>
