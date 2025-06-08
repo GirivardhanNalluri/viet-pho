@@ -1,18 +1,14 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Viet-Pho</title>
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Custom CSS -->
   <link rel="stylesheet" href="../statics/css/order.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
-  <!-- Header Section -->
   <header class="header d-flex justify-content-between align-items-center px-4 py-2">
     <div class="header-left fw-bold fs-4">Viet-Pho</div>
     <div class="header-right">
@@ -20,7 +16,6 @@
     </div>
   </header>
 
-  <!-- Slideshow Section -->
   <div class="slideshow-container">
     <div class="image-slider" id="imageSlider">
       <div class="image-slide"><img src="../statics/images/sand1.jpg" alt="Slide 1"></div>
@@ -30,7 +25,6 @@
     </div>
   </div>
 
-  <!-- Dots -->
   <div class="dot-container text-center mt-2">
     <span class="dot active"></span>
     <span class="dot"></span>
@@ -38,7 +32,6 @@
     <span class="dot"></span>
   </div>
 
-  <!-- Menu Button Section -->
 <button type="button" class="menu-button" onclick="openMenuPopup()">
   <i class="fas fa-utensils"></i> Menu
 </button>
@@ -67,7 +60,6 @@
   <i class="fas fa-shopping-cart"></i> Cart
 </button>
 
-      <!-- Menu Item -->
       <div class="col-md-4">
         <div class="card menu-card h-100">
           <img src="../statics/images/sand1.jpg" class="card-img-top" id="menu-sandwich" alt="Sandwich">
@@ -80,7 +72,6 @@
         </div>
       </div>
 
-      <!-- Menu Item -->
       <div class="col-md-4">
         <div class="card menu-card h-100">
           <img src="../statics/images/sand2.jpg" class="card-img-top" alt="Sandwich">
@@ -93,7 +84,6 @@
         </div>
       </div>
 
-      <!-- Menu Item -->
       <div class="col-md-4">
         <div class="card menu-card h-100">
           <img src="../statics/images/sand3.jpg" class="card-img-top" alt="Sandwich">
@@ -106,7 +96,6 @@
         </div>
       </div>
 
-      <!-- Menu Item -->
       <div class="col-md-4">
         <div class="card menu-card h-100">
           <img src="../statics/images/vn1.jpg" class="card-img-top" id="menu-noodles" alt="Noodles">
@@ -119,7 +108,6 @@
         </div>
       </div>
 
-      <!-- Menu Item -->
       <div class="col-md-4">
         <div class="card menu-card h-100">
           <img src="../statics/images/vn2.jpg" class="card-img-top" alt="Noodles">
@@ -132,7 +120,6 @@
         </div>
       </div>
 
-      <!-- Menu Item -->
       <div class="col-md-4">
         <div class="card menu-card h-100">
           <img src="../statics/images/vn3.jpg" class="card-img-top" alt="Noodles">
@@ -145,7 +132,6 @@
         </div>
       </div>
 
-      <!-- Menu Item -->
       <div class="col-md-4">
         <div class="card menu-card h-100">
           <img src="../statics/images/fr1.jpg" class="card-img-top" id="menu-fried-rice" alt="Fried Rice">
@@ -158,7 +144,6 @@
         </div>
       </div>
 
-      <!-- Menu Item -->
       <div class="col-md-4">
         <div class="card menu-card h-100">
           <img src="../statics/images/fr2.jpg" class="card-img-top" alt="Fried Rice">
@@ -171,7 +156,6 @@
         </div>
       </div>
 
-      <!-- Menu Item -->
       <div class="col-md-4">
         <div class="card menu-card h-100">
           <img src="../statics/images/fr3.jpg" class="card-img-top" alt="Fried Rice">
@@ -184,7 +168,6 @@
         </div>
       </div>
 
-      <!-- Menu Item -->
       <div class="col-md-4">
         <div class="card menu-card h-100">
           <img src="../statics/images/rice1.jpg" class="card-img-top" id="menu-white-rice" alt="white Rice">
@@ -197,7 +180,6 @@
         </div>
       </div>
 
-      <!-- Menu Item -->
       <div class="col-md-4">
         <div class="card menu-card h-100">
           <img src="../statics/images/rice2.jpg" class="card-img-top" alt="white Rice">
@@ -212,7 +194,7 @@
 
     </div>
   </section>
-<!-- Cart Modal -->
+
 <div id="cartModal" class="cart-modal">
   <div class="cart-content">
     <span class="close-btn" onclick="closeCart()">&times;</span>
@@ -224,18 +206,16 @@
   </div>
 </div>
 
-  <!-- Footer -->
   <footer class="footer text-center">
     <p>&copy; 2025 Viet-Pho. All rights reserved.</p>
   </footer>
 
-  <!-- JavaScript -->
   <script>
 function scrollToItem(id) {
   const element = document.getElementById(id);
   if (element) {
     element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    closeMenuPopup(); // Close popup after scrolling
+    closeMenuPopup(); 
   }
 }
     let currentIndex = 0;
@@ -307,7 +287,6 @@ function showQuantitySelector(button) {
   button.parentElement.appendChild(container);
   button.remove();
 
-  // Show the cart button when something is added
   document.getElementById('cartButton').style.display = 'inline-block';
 }
 let cart = [];
@@ -350,11 +329,9 @@ function showQuantitySelector(button) {
   container.appendChild(quantityDisplay);
   container.appendChild(incrementBtn);
 
-  // Remove Add to Cart button and add selector
   button.parentElement.appendChild(container);
   button.remove();
 
-  // Add to cart with initial quantity
   addToCart(title, price, quantity);
   document.getElementById('cartButton').style.display = 'inline-block';
 }
@@ -426,7 +403,6 @@ function openCart() {
       container.appendChild(row);
     });
   }
-
   document.getElementById('cartModal').style.display = 'block';
 }
 function closeCart() {
